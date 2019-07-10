@@ -4,6 +4,7 @@ import com.github.nicolasperuch.entity.CarEntity;
 import com.github.nicolasperuch.repository.CarRepository;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -25,5 +26,9 @@ public class CarService {
 
     public void publish(CarEntity carEntity){
         kafkaTemplate.send(CAR_TOPIC, carEntity.toString());
+    }
+
+    public Flux<CarEntity> findAll() {
+        return carRepository.findAll();
     }
 }

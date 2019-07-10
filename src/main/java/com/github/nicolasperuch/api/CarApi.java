@@ -18,11 +18,9 @@ import static org.springframework.http.ResponseEntity.status;
 @RequestMapping("/car")
 public class CarApi {
 
-    private CarRepository carRepository;
     private CarService carService;
 
     public CarApi(CarRepository carRepository, CarService carService) {
-        this.carRepository = carRepository;
         this.carService = carService;
     }
 
@@ -34,6 +32,6 @@ public class CarApi {
 
     @GetMapping
     public Flux<CarEntity> getCars(){
-        return carRepository.findAll();
+        return carService.findAll();
     }
 }
